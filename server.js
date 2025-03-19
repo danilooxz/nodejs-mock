@@ -27,10 +27,14 @@ app.post('/products', (req, res) => {
 //Atualiza varios sem retorno 
 app.put('/products/:id', (req, res) => {
     const { id } = req.params;
-    const updates = req.body;
+    const { name } = req.body;
 
-    //Buscar posição dentro do arry
-    //Atulizar lista com o projeto
+const productIndex = products.findIndex(product => product.id == id);
+if (productIndex == -1) {
+    return res.status(404).send();
+}
+
+products[productIndex] = {...products[productIndex], name}
 
     res.status(200).json(products).send();
 });
