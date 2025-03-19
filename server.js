@@ -26,13 +26,19 @@ app.post('/products', (req, res) => {
 
 //Atualiza varios sem retorno 
 app.put('/products/:id', (req, res) => {
-    
+    const { id } = req.params;
+    const updates = req.body;
+
+    //Buscar posição dentro do arry
+    //Atulizar lista com o projeto
+
     res.status(200).json(products).send();
 });
 
 //Atualiza Um
 app.patch('/products/:id', (req, res) => {
-
+    const { id } = req.params;
+    const { name } = req.body;
     res.status(200).json(products).send();
 });
 
