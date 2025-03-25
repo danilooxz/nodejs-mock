@@ -18,8 +18,8 @@ app.get('/products', (req, res) => {
 
 //Cria
 app.post('/products', (req, res) => {
-    const { name, marca, tamanho, cor} = req.body;
-    products.push({ id: products.length + 1, name });
+    const { name, status} = req.body;
+    products.push({ id: products.length + 1, name, status });
 
     res.status(201).json().send();
 });
@@ -40,9 +40,17 @@ products[productIndex] = {...products[productIndex], name}
 });
 
 //Atualiza Um
-app.patch('/products/:id', (req, res) => {
+app.patch('/products/:id/status', (req, res) => {
     const { id } = req.params;
-    const { name } = req.body;
+    const { status } = req.body;
+
+const productIndex = products.findIndex(product => product.id == id);
+if (productIndex == -1) {
+    return res.status(404).send();
+}
+
+products[productIndex] = {...products[productIndex], status}
+
     res.status(200).json(products).send();
 });
 
